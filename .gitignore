@@ -3,6 +3,13 @@
 *.vcxproj.filters
 *.vcxproj.user
 
+# 빌드 결과물 제외 (Debug, Release 폴더)
+x64/Debug/
+x64/Release/
+x86/Debug/
+x86/Release/
+
+
 # Visual Studio 관련 빌드 파일 및 사용자 설정 파일 무시
 .vs/
 *.vcxproj.user
