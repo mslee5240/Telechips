@@ -1,0 +1,39 @@
+# Visual Studio 관련 빌드 파일 및 사용자 설정 파일 무시
+.vs/
+*.vcxproj.user
+*.suo
+*.ncb
+*.sdf
+*.opensdf
+*.cache
+*.ilk
+*.ipch
+*.obj
+*.pdb
+*.pch
+*.idb
+*.tlog
+*.log
+
+# 빌드 결과물 제외 (Debug/Release 폴더)
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.out
+*.app
+*.lib
+*.so
+*.a
+*.lo
+*.la
+
+# CMake 관련 빌드 파일 제외
+CMakeCache.txt
+CMakeFiles/
+CMakeLists.txt.user
+compile_commands.json
+
+# Visual Studio Code 설정 파일 제외
+.vscode/
+*.code-workspace
