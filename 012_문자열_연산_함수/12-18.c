@@ -5,7 +5,7 @@
 char *my_strcpy(char * pd, char* ps);
 
 int main(void) {
-    char str1[80] = "Strawberry";
+    char str[80] = "Strawberry";
 
     printf("바꾸기 전 문자열: %s\n", str);
     my_strcpy(str, "apple");
