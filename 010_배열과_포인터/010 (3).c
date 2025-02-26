@@ -1,25 +1,25 @@
-//#include <stdio.h>
-//
-//int main(void) {
-//	char ch;
-//	int in;
-//	double db;
-//
-//	char* pch = &ch;
-//	int* pin = &in;
-//	double* pdb = &db;
-//
-//	printf("charÇü º¯¼öÀÇ ÁÖ¼Ò Å©±â: %d\n", sizeof(&ch));
-//	printf("intÇü º¯¼öÀÇ ÁÖ¼Ò Å©±â: %d\n", sizeof(&ch));
-//	printf("doubleÇü º¯¼öÀÇ ÁÖ¼Ò Å©±â: %d\n\n", sizeof(&ch));
-//
-//	printf("char Æ÷ÀÎÅÍ º¯¼öÀÇ Å©±â: %d\n", sizeof(pch));
-//	printf("int Æ÷ÀÎÅÍ º¯¼öÀÇ Å©±â: %d\n", sizeof(pin));
-//	printf("double Æ÷ÀÎÅÍ º¯¼öÀÇ Å©±â: %d\n\n", sizeof(pdb));
-//
-//	printf("char Æ÷ÀÎÅÍ°¡ °¡¸£Å°´Â º¯¼öÀÇ Å©±â: %d\n", sizeof(*pch));
-//	printf("int Æ÷ÀÎÅÍ°¡ °¡¸£Å°´Â Æ÷ÀÎÅÍ º¯¼öÀÇ Å©±â: %d\n", sizeof(*pin));
-//	printf("double Æ÷ÀÎÅÍ°¡ °¡¸£Å°´Â Æ÷ÀÎÅÍ º¯¼öÀÇ Å©±â: %d\n\n", sizeof(*pdb));
-//
-//	return 0;
-//}
+#include <stdio.h>
+
+int main(void) {
+	char ch;
+	int in;
+	double db;
+
+	char* pch = &ch;
+	int* pin = &in;
+	double* pdb = &db;
+
+	printf("charï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ Å©ï¿½ï¿½: %d\n", sizeof(&ch));
+	printf("intï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ Å©ï¿½ï¿½: %d\n", sizeof(&ch));
+	printf("doubleï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ Å©ï¿½ï¿½: %d\n\n", sizeof(&ch));
+
+	printf("char ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: %d\n", sizeof(pch));
+	printf("int ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: %d\n", sizeof(pin));
+	printf("double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: %d\n\n", sizeof(pdb));
+
+	printf("char ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: %d\n", sizeof(*pch));
+	printf("int ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: %d\n", sizeof(*pin));
+	printf("double ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: %d\n\n", sizeof(*pdb));
+
+	return 0;
+}
