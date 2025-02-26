@@ -6,10 +6,10 @@ void line_up(double* maxp, double* midp, double* minp);
 int main(void) {
 	double max, mid, min;
 
-	printf("½Ç¼ö°ª 3°³ ÀÔ·Â: ");
+	printf("ï¿½Ç¼ï¿½ï¿½ï¿½ 3ï¿½ï¿½ ï¿½Ô·ï¿½: ");
 	scanf_s("%lf %lf %lf", &max, &mid, &min);
 	line_up(&max, &mid, &min);
-	printf("Á¤·ÄµÈ °ª Ãâ·Â: %lf, %lf, %lf\n", max, mid, min);
+	printf("ï¿½ï¿½ï¿½Äµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½: %lf, %lf, %lf\n", max, mid, min);
 
 	return 0;
 }

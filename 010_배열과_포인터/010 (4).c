@@ -1,20 +1,20 @@
-//#include <stdio.h>
-//
-//void swap(int* pa, int* pb) {
-//	int temp;
-//	temp = *pa;
-//	*pa = *pb;
-//	*pb = temp;
-//}
-//
-//int main(void) {
-//	int a = 10, b = 20;
-//
-//	printf("º¯°æ Àü, a = %d, b = %d\n", a, b);
-//
-//	swap(&a, &b);
-//
-//	printf("º¯°æ ÈÄ, a = %d, b = %d\n", a, b);
-//
-//	return 0;
-//}
+#include <stdio.h>
+
+void swap(int* pa, int* pb) {
+	int temp;
+	temp = *pa;
+	*pa = *pb;
+	*pb = temp;
+}
+
+int main(void) {
+	int a = 10, b = 20;
+
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, a = %d, b = %d\n", a, b);
+
+	swap(&a, &b);
+
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, a = %d, b = %d\n", a, b);
+
+	return 0;
+}
