@@ -1,12 +1,11 @@
-// app.c
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 
 // 구조체 선언 (명시적)
 struct student1 {
-    int num;
-    double grade;
+    int num;        // int형 멤버
+    double grade;   // double형 멤버
 };
 
 // 구조체 선언 (암시적)
@@ -16,7 +15,7 @@ typedef struct {
 } student2_t;
 
 void app(void) {
-    struct student1 s1;  // 구조체를 사용한 변수 선언
+    struct student1 s1;  // 구조체를 사용한 변수 선언, struct student1형의 변수 선언
     student2_t s2;
 
     s1.num = 2;
