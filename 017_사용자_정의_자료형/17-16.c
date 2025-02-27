@@ -31,7 +31,7 @@ void app(void) {
     current = head;
     while (current != NULL) {
         printf("%d ", current->seats);
-        current = curretn->next;
+        current = current->next;
     }
 
 }

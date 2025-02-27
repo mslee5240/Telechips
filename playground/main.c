@@ -17,7 +17,7 @@ int main(void) {
     char buffer[BUFFER_SIZE] = { 0 };
     char* message = "Hello from server";
 
-    // ì†Œì¼“ ì„¤ì •
+    // ¼ÒÄÏ ¼³Á¤
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
@@ -26,21 +26,21 @@ int main(void) {
     bind(server_fd, (struct sockaddr*)&address, sizeof(address));
     listen(server_fd, 3);
 
-    printf("ì„œë²„ ëŒ€ê¸° ì¤‘... í¬íŠ¸ : %d\n", PORT);
+    printf("¼­¹ö ´ë±â Áß... Æ÷Æ® : %d\n", PORT);
 
-    // ì ‘ì† ëŒ€ê¸°
+    // Á¢¼Ó ´ë±â
     new_socket = accept(server_fd, (struct sockaddr*)&address, &addrlen);
 
-    // ë°ì´í„° ìˆ˜ì‹ 
+    // µ¥ÀÌÅÍ ¼ö½Å
     while (1) {
         memset(buffer, 0, sizeof(buffer));
         recv(new_socket, buffer, BUFFER_SIZE, 0);
-        printf("í´ë¼ì´ì–¸íŠ¸ : %s\n", buffer);
+        printf("Å¬¶óÀÌ¾ğÆ® : %s\n", buffer);
         if (strcmp(buffer, "stop") == 0) break;
     }
     
 
-    // ì ‘ì† ì¢…ë£Œ
+    // Á¢¼Ó Á¾·á
     closesocket(new_socket);
     closesocket(server_fd);
 
