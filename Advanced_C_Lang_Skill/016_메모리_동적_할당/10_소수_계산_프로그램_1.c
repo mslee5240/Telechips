@@ -39,7 +39,12 @@ int main(void) {
     // 출력
     printf("> 소수 목록: \n");
     for (int i = 0; i < n - 1; i++) {
-        printf("%5d", nArr[i]);
+        if (nArr[i] == 0) {
+            printf("%5c", 'X');
+        }
+        else {
+            printf("%5d", nArr[i]);
+        }
         if ((i + 1) % 5 == 0) {
             printf("\n");
         }
