@@ -85,11 +85,12 @@ element delete(ArrayListType* L, int pos) {
 
 // 숙제
 void clear(ArrayListType* L) {
-
+    L->size = 0;
 }
 
-void repla(ArrayListType* L, int pos, element item) {
 
+void replace(ArrayListType* L, int pos, element item) {
+    
 }
 
 int get_length(ArrayListType* L) {
