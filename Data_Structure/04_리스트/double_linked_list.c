@@ -88,3 +88,34 @@ void borrow_book(DListNode* head, int id) {
         printf("책 \'%s\' (ID: %d)을 대출했습니다.\n", node->data.bookname, node->data.id);
     }
 }
+
+// 도서 반납 함수
+void return_book(DListNode* head, int id) {
+    DListNode* node = dSearch_id(head, id);
+    if (node == NULL) {
+        printf("책 ID %d를 찾을 수 없습니다.\n", id);
+    }
+    else if (!node->data.is_borrowed) {
+        printf("책 \'%s\' (ID: %d)은 이미 반납된 상태입니다.\n", node->data.bookname, node->data.id);
+    }
+    else {
+        node->data.is_borrowed = 0;
+        printf("책 \'%s\' (ID: %d)을 반납했습니다.\n", node->data.bookname, node->data.id);
+    }
+}
+
+// 도서 목록 출력 함수
+void display_books(DListNode* head) {
+    if (!head) {
+        printf("등록된 책이 없습니다.\n");
+        return;
+    }
+    DListNode* p = head->rLink; // 이중 연결 리스트 시작 위치
+    printf("\n도서 목록\n");
+    while (p != head) {     // 이중 연결 리스트 끝까지 반복
+        printf("ID: %d, 제목: %s, 상태: %s\n", 
+            p->data.id, p->data.bookname, p->data.is_borrowed ? "대출" : "보유");
+        p = p->rLink;       // 다음 노드로 이동
+    }
+}
+
