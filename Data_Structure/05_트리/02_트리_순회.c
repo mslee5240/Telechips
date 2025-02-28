@@ -8,38 +8,56 @@ typedef struct TreeNode {
     struct TreeNode* left, * right;
 } TreeNode;
 
+//       15
+//     4    20
+//   1   16    25
 TreeNode n1 = { 1, NULL, NULL };
 TreeNode n2 = { 4, &n1, NULL };
 TreeNode n3 = { 16, NULL, NULL };
 TreeNode n4 = { 25, NULL, NULL };
 TreeNode n5 = { 20, &n3, &n4 };
 TreeNode n6 = { 15, &n2, &n5 };
+TreeNode* root = &n6;
 
-//       15
-//     4    20
-//   1   16    25
+// 중위 순회
+void inorder(TreeNode* root) {
+    if (root != NULL) {
+        inorder(root->left);            // 왼쪽 서브트리 순회
+        printf("[%d] ", root->data);    // 노드 값 인쇄 (노드 방문)
+        inorder(root->right);           // 오른쪽 서브트리 순회
+    }
+}
+
+// 전위 순회
+void preorder(TreeNode* root) {
+    if (root != NULL) {
+        printf("[%d] ", root->data);    // 노드 값 인쇄 (노드 방문)
+        preorder(root->left);           // 왼쪽 서브트리 순회
+        preorder(root->right);          // 오른쪽 서브트리 순회
+    }
+}
+
+// 후위 순회
+void postorder(TreeNode* root) {
+    if (root != NULL) {
+        postorder(root->left);          // 왼쪽 서브트리 순회
+        postorder(root->right);         // 오른쪽 서브트리 순회
+        printf("[%d] ", root->data);    // 노드 값 인쇄 (노드 방문)
+    }
+}
 
 int main(void) {
-    TreeNode* n1, * n2, * n3;   // n1은 n2, n3의 부모
+    printf("중위 순회 = ");
+    inorder(root);
+    printf("\n");
 
-    n1 = (TreeNode*)malloc(sizeof(TreeNode));
-    n2 = (TreeNode*)malloc(sizeof(TreeNode));
-    n3 = (TreeNode*)malloc(sizeof(TreeNode));
+    printf("전위 순회 = ");
+    preorder(root);
+    printf("\n");
 
-    n1->data = 10;
-    n1->left = n2;
-    n1->right = n3;
-    n2->data = 20;
-    n2->left = NULL;
-    n2->right = NULL;
-    n2->data = 30;
-    n2->left = NULL;
-    n2->right = NULL;
+    printf("후위 순회 = ");
+    postorder(root);
+    printf("\n");
 
-    free(n1);
-    free(n2);
-    free(n3);
-
-    
     return 0;
 }
