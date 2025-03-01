@@ -74,6 +74,8 @@ DListNode* dSearch_name(DListNode* head, char* name) {
     return NULL;
 }
 
+// 이하 도서 대출 시스템 구현 함수
+
 // 도서 대출 함수
 void borrow_book(DListNode* head, int id) {
     DListNode* node = dSearch_id(head, id);

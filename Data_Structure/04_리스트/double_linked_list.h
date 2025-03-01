@@ -37,6 +37,8 @@ void dInsert(DListNode* before, element data);
 void dDelte(DListNode* head, DListNode* removed);
 DListNode* dSearch_id(DListNode* head, int id);
 DListNode* dSearch_name(DListNode* head, char* name);
+
+// 도서 대출 시스템
 void borrow_book(DListNode* head, int id);
 void return_book(DListNode* head, int id);
 void display_books(DListNode* head);

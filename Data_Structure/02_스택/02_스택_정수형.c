@@ -3,9 +3,10 @@
 #include <stdlib.h>
 
 #define MAX_STACK_SIZE 100  // 최대 스택의 크기
+
 typedef int element;        // int 자료형을 element라는 새로운 이름으로 정의하는 것
 
-element stack[MAX_STACK_SIZE];
+element stack[MAX_STACK_SIZE];  // int stack[100];과 동일
 int top = -1;
 
 // 공백 상태 검사

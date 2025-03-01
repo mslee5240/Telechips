@@ -11,7 +11,7 @@ typedef struct {
     char address[MAX_STRING];
 } element;
 
-element stack[MAX_STACK_SIZE];
+element stack[MAX_STACK_SIZE];  // int stack[100];과 동일
 int top = -1;
 
 // 공백 상태 검사

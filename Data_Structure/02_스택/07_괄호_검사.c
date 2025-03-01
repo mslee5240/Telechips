@@ -6,12 +6,14 @@ int check_matching(const char* in);
 
 int main(void) {
     char* p = "{ A [ ( i + 1) ] = 0; }";
+
     if (check_matching(p) == 1) {
         printf("%s 괄호 검사 성공\n", p);
     }
     else {
         printf("%s 괄호 검사 실패\n", p);
     }
+
     return 0;
 }
 
@@ -43,8 +45,10 @@ int check_matching(const char* in) {
             }
         }
     }
+    
     if (!is_empty(&s)) {
         return 0;
     }
+
     return 1;
 }

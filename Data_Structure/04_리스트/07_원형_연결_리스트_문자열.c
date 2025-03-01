@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef char element[80];
-
+typedef char element[80];   // 길이가 80인 char 배열을 element라는 새로운 타입으로 정의
 
 typedef struct ListNode {
     element data;

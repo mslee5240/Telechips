@@ -50,7 +50,7 @@ int main(void) {
     printf("중위 순회 = ");
     inorder(root);
     printf("\n");
-
+    
     printf("전위 순회 = ");
     preorder(root);
     printf("\n");
