@@ -29,6 +29,5 @@ int main(void) {
     free(n2);
     free(n3);
 
-    
     return 0;
 }

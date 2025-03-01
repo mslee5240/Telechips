@@ -124,5 +124,6 @@ int main(void) {
         }
     }
     printf("전체 대기 시간 = %d분\n", total_wait);
+    
     return 0;
 }

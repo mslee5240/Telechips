@@ -51,7 +51,7 @@ void insert_last(ArrayListType* L, element item) {
 
 void insert(ArrayListType* L, int pos, element item) {
     if (!is_full(L) && (pos >= 0) && (pos <= L->size)) {
-        // 뒤에서 부터 데이터를 하나씩 뒤로 복사한다. (핵심)
+        // (핵심) 뒤에서 부터 데이터를 하나씩 뒤로 복사한다. 
         // for (int i = (L->size - 1); i >= pos; i--) {
         //     L->array[i + 1] = L->array[i];  // 한칸씩 뒤로 밀기
         // }
@@ -83,20 +83,21 @@ element delete(ArrayListType* L, int pos) {
     return item;
 }
 
-// 숙제
+// gpt로 구현한 부분 - 다시 생각해보기.
 void clear(ArrayListType* L) {
     L->size = 0;
 }
 
-
 void replace(ArrayListType* L, int pos, element item) {
-    
+    if (pos < 0 || pos >= L->size) {
+        error("위치 오류");
+    }
+    L->array[pos] = item;
 }
 
 int get_length(ArrayListType* L) {
-
+    return L->size;
 }
-
 
 int main(void) {
     ArrayListType list;

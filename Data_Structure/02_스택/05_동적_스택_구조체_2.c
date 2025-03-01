@@ -62,7 +62,6 @@ element peek(StackType* s) {
 // 스택 삭제 함수
 void delete(StackType* s) {
     free(s);
-
 }
 
 int main(void) {

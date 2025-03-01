@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-
 double power(double x, int n) {
     if (n == 0) {
         return 1;
@@ -16,5 +15,6 @@ double power(double x, int n) {
 int main(void) {
     int result = (int)power(2, 10);
     printf("2의 10승은 %d", result);
+    
     return 0;
 }

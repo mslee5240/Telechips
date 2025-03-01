@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// 계수 coefficient
-// 지수 exponential
+// 계수: coefficient, 지수: exponential
 
 typedef struct ListNode {
     int coef;   // 계수

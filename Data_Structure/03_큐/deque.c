@@ -51,7 +51,6 @@ element delete_front(DequeType* q) {
     return q->data[q->front];
 }
 
-
 element get_front(DequeType* q) {
     if (is_empty(q)) {
         error("큐가 공백상태입니다.");

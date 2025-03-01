@@ -65,7 +65,6 @@ int main(void) {
         }
         printf("성공\n");
     }
-
-
+    
     return 0;
 }
