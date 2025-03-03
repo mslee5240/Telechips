@@ -39,7 +39,7 @@ void input_data(Student* pary) {
         printf("> 학번 :  ");
         scanf("%d", &pary->id);     // == pary[0].num
         printf("> 이름 :  ");
-        scanf("%s", &pary->name);
+        scanf("%s", pary->name);
         printf("> 국어 영어 수학 점수 :  ");
         scanf("%d %d %d", &pary->kor, &pary->eng, &pary->math);
         pary++;
