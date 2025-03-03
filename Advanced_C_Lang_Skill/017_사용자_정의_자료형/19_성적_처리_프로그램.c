@@ -30,7 +30,7 @@ int main(void) {
     sort_data(ary);     // 총점 순으로 내림차순 정렬
     printf("\n# 정렬 후 데이터...\n");
     print_data(ary);    // 정렬 후 출력
-    
+
     return 0;
 }
 
@@ -39,7 +39,7 @@ void input_data(Student* pary) {
         printf("> 학번 :  ");
         scanf("%d", &pary->id);     // == pary[0].num
         printf("> 이름 :  ");
-        scnaf("%s", &pary->name);
+        scanf("%s", &pary->name);
         printf("> 국어 영어 수학 점수 :  ");
         scanf("%d %d %d", &pary->kor, &pary->eng, &pary->math);
         pary++;
@@ -58,22 +58,23 @@ void calc_data(Student* pary) {
             pary->grade = 'B';
         }
         else if (pary->average >= 70) {
-            pary->average = 'C';
+            pary->grade = 'C';
         }
         else if (pary->average >= 60) {
-            pary->average = 'D';
+            pary->grade = 'D';
         }
         else {
-            pary->average = 'F';
+            pary->grade = 'F';
         }
+        pary++;
     }
-    pary++;
+    
 }
 
 void print_data(Student* pary) {
     for (int i = 0; i < 5; i++) {
         printf("%5d %7s %5d %5d %5d %5d %7.1lf %5c\n",
-            pary->id, pary->name, pary->kor, pary->eng, pary->math, 
+            pary->id, pary->name, pary->kor, pary->eng, pary->math,
             pary->total, pary->average, pary->grade);
         pary++;
     }
