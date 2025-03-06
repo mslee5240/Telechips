@@ -33,14 +33,14 @@ int get_button(int button_num, int button_pin)
     // 버튼이 눌린 경우 (기존 상태는 RELEASE)
     if (current_state && button_status[button_num] == BUTTON_RELEASE) // 버튼이 처음 눌려진 noise high 상태
     {
-        _delay_ms(50);	// 노이즈 필터링 (디바운싱)
+        _delay_ms(30);	// 노이즈 필터링 (디바운싱)
         button_status[button_num] = BUTTON_PRESS;	// 버튼이 눌린 상태 저장; noise가 지나간 상태의 High 상태
         return 0;	// 아직 완전히 눌렸다 떼어진 상태가 아님
     }
     // 버튼이 떼어진 경우 (기존 상태는 PRESS)
     else if (current_state == BUTTON_RELEASE && button_status[button_num] == BUTTON_PRESS)
     {
-        _delay_ms(50);	// 노이즈 필터링 (디바운싱)
+        _delay_ms(30);	// 노이즈 필터링 (디바운싱)
         button_status[button_num] = BUTTON_RELEASE;	// 버튼 상태 초기화
         return 1;	// 버튼이 눌렸다가 떼어진 상태 (완전한 입력)
     }
