@@ -1,15 +1,18 @@
-# 🚀 Advanced C Techniques  
+# 🚀 System Semiconductor SW Development
 
-> **Mastering the Art of C, Data Structures, Embedded Systems, and Hardware Design**  
+> **Mastering the Art of C, Embedded Systems, and Semiconductor Software Development**  
 
 ## 🛠 Key Topics  
-- ⚡ **Advanced C Programming** – Optimized and efficient coding  
-- 📚 **Data Structures** – Enhancing performance and memory management  
-- 🔌 **ATmega128A** – Low-level embedded system control  
-- 🏎 **STM32 Development** – ARM Cortex-M microcontroller programming  
-- 🎛 **FPGA & Circuit Design** – Hardware description & digital logic implementation  
+- ⚡ **Advanced C Programming** – Writing optimized, high-performance embedded code  
+- 📚 **Data Structures & Algorithms** – Efficient memory management and real-time processing  
+- 🔌 **ATmega128A & STM32** – Low-level microcontroller programming & system optimization  
+- 🏎 **RTOS & Embedded Linux** – Real-time task scheduling and system-level programming  
+- 🎛 **FPGA & Hardware Design** – Digital logic implementation for ASIC & SoC development  
+- 🖥 **Device Drivers & Firmware** – Bridging hardware and software with efficient drivers  
+- 🏭 **Semiconductor Software Development** – Coding for system-level integration and optimization  
 
 ### 💡 Why?  
-Building high-performance, scalable, and embedded-friendly applications with C, microcontrollers, and FPGA.  
+System semiconductor software development requires a deep understanding of hardware and software co-design. This repository aims to enhance proficiency in embedded programming, firmware development, and semiconductor applications.  
 
-🎯 *Push the limits. Write better code. Control the hardware. Design efficient circuits.*  
+🎯 *Optimize embedded software. Interface with hardware. Develop for cutting-edge semiconductor technology.*
+
