@@ -15,4 +15,8 @@
 #define FND_DIGIT_D3		6
 #define FND_DIGIT_D4		7
 
+void init_fnd(void);
+void fnd_display_1(uint32_t* ms_count, uint32_t* sec_count);
+void fnd_display_2(uint32_t* ms_count, uint32_t* sec_count);
+
 #endif /* INCFILE1_H_ */
