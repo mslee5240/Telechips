@@ -13,7 +13,7 @@ int main(void)
 	// PORTA의 모든 핀을 출력(1)으로 설정
 	
 	// 버튼 상태 변수 초기화
-	int button_0_state[4] = { 0 };
+	int button_state[4] = { 0 };
 	
 	// 버튼 초기화 (입력 모드로 설정)
 	init_button();
@@ -35,10 +35,10 @@ int main(void)
 	{
 		if (get_button(BUTTON_0, BUTTON_0_PIN))
 		{
-			button_0_state[0]++;
-			button_0_state[0] %= 8;
+			button_state[0]++;
+			button_state[0] %= 8;
 		}
-		fp[button_0_state[0]] ();
+		fp[button_state[0]] ();
 	}
 
 	return 0;
