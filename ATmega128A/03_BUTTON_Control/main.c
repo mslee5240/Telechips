@@ -12,7 +12,7 @@ int main(void)
 	DDRA = 0b11111111;	// Data Direction Register
 	// PORTA의 모든 핀을 출력(1)으로 설정
 	
-	// 버튼 상태 변수 초기화
+	// 버튼 상태 변수 초기화 => array로 변환해보자!
 	int button_0_state = 0;     // 버튼 0의 상태 (0: OFF, 1: ON)
 	int button_1_state = 0;
 	int button_2_state = 0;
