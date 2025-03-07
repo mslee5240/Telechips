@@ -6,7 +6,6 @@
 #include "button.h"
 #include "fnd.h"
 
-
 int main(void)
 {
 	init_button();
@@ -33,6 +32,7 @@ int main(void)
 		}
 		fp_0[button_state[0]] (f_ms, f_sec);
 		_delay_ms(1);
+		
 		ms_count++;
 		if (ms_count >= 999)   // 1000ms = 1sec
 		{
