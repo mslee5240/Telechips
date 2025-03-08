@@ -1,4 +1,3 @@
-// 조건부 컴파일
 #ifndef LED_H_
 #define LED_H_
 
