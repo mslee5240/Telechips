@@ -87,7 +87,7 @@
                  
              //button_state[0]++;          // 모드 인덱스 증가
              //button_state[0] %= 3;         // 0, 1, 2의 3가지 모드로 순환
-             reset_time();               // 시간 카운터 초기화
+             reset_time();               // 시간 카운터 초g기화
              init_fnd();                 // 디스플레이 초기화 (자릿수 리셋)
          }
          
