@@ -1,10 +1,7 @@
-#ifndef UART0_H_
-#define UART0_H_
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <stdio.h>
 #include <string.h>
+
 #include "def.h"
 
 /*
@@ -26,6 +23,3 @@ volatile uint8_t rx_msg_received;
 void init_uart0(void);
 void UART0_transmit(uint8_t data);
 void pc_command_processing(void);
-
-
-#endif /* UART0_H_ */
