@@ -86,18 +86,6 @@ void UART0_transmit(uint8_t data)
 	UDR0 = data;
 }
 
-void (*fp_led[])(void) =
-{
-	led_all_on,
-	led_all_off,
-	shift_left_led_on,
-	shift_right_led_on,
-	shift_left_keep_led_on,
-	shift_right_keep_led_on,
-	flower_on,
-	flower_off
-};
-
 char* led_func[8] = {
 	"led_all_on",
 	"led_all_off",
@@ -124,14 +112,13 @@ void pc_command_processing(void)
 		
 		for (int i = 0; i < 8; i++)
 		{
-			// 예) "led_all_on" 명령 확인
 			if (strncmp((char*)rx_buff[front], led_func[i], strlen(led_func[i])) == 0)
 			{
 				printf("find!\n");
-				fp_led[i] ();
+				fp_num = i;
+				break;
 			}
 		}
-		
 		
 		// 다음 데이터로 넘어가기 위해 front 인덱스 증가
 		front = (front + 1) % COMMAND_NUMBER;
