@@ -2,8 +2,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define LED_DDR		    DDRA	// LED 데이터 방향 레지스터
-#define LED_PORT	    PORTA   // LED 포트 출력 레지스터
+#define LED_DDR		    DDRB	// LED 데이터 방향 레지스터
+#define LED_PORT	    PORTB   // LED 포트 출력 레지스터
 
 void init_led(void);
 void led_main(void);
