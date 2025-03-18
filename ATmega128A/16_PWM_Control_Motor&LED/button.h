@@ -4,8 +4,6 @@
 
 // LED 관련 설정
 // 이렇게 하는 이유: LED PORT가 변경되면, #define만 바꿔줘도 컴파일러가 변경해주기 때문
-#define LED_DDR		    DDRA	// LED 데이터 방향 레지스터
-#define LED_PORT	    PORTA   // LED 포트 출력 레지스터
 
 // 버튼 관련 설정
 #define BUTTON_DDR		DDRD    // 버튼 데이터 방향 레지스터

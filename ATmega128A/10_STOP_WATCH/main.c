@@ -4,30 +4,30 @@
  * 버튼 입력에 따른 모드 전환, 시간 업데이트, 깜빡임 효과 및 디스플레이 갱신을 수행합니다.
  */
 
- #define F_CPU 16000000UL
- #include <avr/io.h>
- #include <avr/interrupt.h>
- #include "button.h"
- #include "fnd.h"
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "button.h"
+#include "fnd.h"
+
+// 전역 변수: 시간 측정 및 디스플레이 제어에 사용 (volatile로 선언하여 ISR과 공유)
+volatile uint32_t time_toggle = 0;   // 0: 시간 업데이트 활성, 1: 정지
+volatile uint32_t milliseconds = 0;      // 밀리초 카운터 (타이머 ISR에서 증가)
+volatile uint32_t displayUpdateCounter = 0;      // 디스플레이 갱신 주기 제어 변수
+volatile uint32_t blinkCounter = 0;       // 깜빡임 효과를 위한 카운터
+volatile uint32_t seconds = 0;       // 초 단위 카운터 (milliseconds에서 1초마다 증가)
  
- // 전역 변수: 시간 측정 및 디스플레이 제어에 사용 (volatile로 선언하여 ISR과 공유)
- volatile uint32_t time_toggle = 0;   // 0: 시간 업데이트 활성, 1: 정지
- volatile uint32_t milliseconds = 0;      // 밀리초 카운터 (타이머 ISR에서 증가)
- volatile uint32_t displayUpdateCounter = 0;      // 디스플레이 갱신 주기 제어 변수
- volatile uint32_t blinkCounter = 0;       // 깜빡임 효과를 위한 카운터
- volatile uint32_t seconds = 0;       // 초 단위 카운터 (milliseconds에서 1초마다 증가)
- 
- // 포인터를 사용해 디스플레이 함수에 시간 데이터를 전달
- volatile uint32_t* f_ms = &milliseconds;
- volatile uint32_t* f_sec = &seconds;
+// 포인터를 사용해 디스플레이 함수에 시간 데이터를 전달
+volatile uint32_t* f_ms = &milliseconds;
+volatile uint32_t* f_sec = &seconds;
  
  /* reset_time()
   * 시간 관련 카운터(milliseconds, seconds)를 0으로 초기화합니다.
   */
- void reset_time() {
-     milliseconds = 0;
-     seconds = 0;
- }
+void reset_time() {
+    milliseconds = 0;
+    seconds = 0;
+}
  
  /* TIMER0_OVF_vect - 타이머0 오버플로우 인터럽트 서비스 루틴 (ISR)
   * - 타이머 카운터(TCNT0)를 6으로 재설정하여 일정 간격을 유지합니다.

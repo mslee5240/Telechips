@@ -1,8 +1,4 @@
-﻿#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <string.h>
-
-#include "def.h"
+﻿#include "uart.h"
 
 /*
  * rx_buff:
@@ -13,10 +9,12 @@
 volatile uint8_t rx_1_buff[COMMAND_NUMBER][COMMAND_LENGTH];
 
 // 큐의 삽입 및 추출 인덱스
-volatile int uart1_rear_idx;	// 데이터가 새로 들어갈 위치
-volatile int uart1_front_idx;	// 아직 처리하지 않은 데이터를 꺼낼 위치
+volatile int uart1_rear;	// 데이터가 새로 들어갈 위치
+volatile int uart1_front;	// 아직 처리하지 않은 데이터를 꺼낼 위치
 
 // UART 초기화, 송신, PC 명령 처리 함수
 void init_uart1(void);
 void UART1_transmit(uint8_t data);
-void pc_command_processing(void);
+void bt_command_processing(void);
+
+

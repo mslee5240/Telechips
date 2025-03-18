@@ -25,7 +25,7 @@ volatile uint32_t* f_sec = &seconds;
 volatile uint32_t* f_hsec = &half_seconds;
 
 // 함수 프로토타입 선언: 타이머 및 전체 초기화 함수
-void init_timer_0(void);
+void init_timer0(void);
 void init_all(void);
 void reset_time(void);
 
@@ -105,7 +105,7 @@ int main(void)
 	return 0;
 }
 
-void init_timer_0(void)
+void init_timer0(void)
 {
 	// 초기 카운터값 설정
 	TCNT0 = 6;

@@ -96,15 +96,6 @@ char* led_func[8] = {
 	"flower_on",
 	"flower_off"
 };
-
-/*
- * pc_command_processing()
- * - 수신된 명령이 있으면(rx_buff에 데이터가 있으면) 순차적으로 꺼내 처리.
- * - front != rear => 큐에 새로운 문자열이 존재
- * - 문자열 비교(strncmp) 시 0이면 동일하다는 뜻이며, "led_all_on" 등을 찾으면 특정 동작 수행
-*/
-
-volatile int fp_num = -1;
 void pc_command_processing(void)
 {
 	if (front != rear)	// 새 명령이 수신됨

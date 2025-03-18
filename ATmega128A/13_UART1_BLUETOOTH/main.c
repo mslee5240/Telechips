@@ -6,6 +6,7 @@
 #include "button.h"
 #include "fnd.h"
 #include "uart0.h"
+#include "uart1.h"
 
 volatile int msec_count = 0;
 
@@ -23,7 +24,7 @@ ISR(TIMER0_OVF_vect)
 void init_timer_0(void);
 
 
-extern int fp_num;
+extern volatile int fp_num;
 void (*fp_led[])(void) =
 {
 	led_all_on,
@@ -35,12 +36,13 @@ void (*fp_led[])(void) =
 	flower_on,
 	flower_off
 };
-
+volatile int fp_num = -1;
 int main(void)
 {
 	// 타이머0 및 UART 초기화
 	init_timer_0();
 	init_uart0();
+	init_uart1();
 	
 	// 표준 출력(stdout)을 UART0의 OUTPUT 스트림에 연결
 	stdout = &OUTPUT;
@@ -61,6 +63,7 @@ int main(void)
     {
 		// 수신된 명령이 있으면 처리
 		pc_command_processing();
+		bt_command_processing();
 		
 		if (fp_num >= 0 && fp_num< 8)
 		{
