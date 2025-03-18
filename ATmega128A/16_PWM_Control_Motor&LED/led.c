@@ -26,8 +26,8 @@ void (*fp[])() =
 };
 
 void init_led(void) {
-	DDRA = 0xff;
-	PORTA = 0x00;
+	DDRB = 0x0f;
+	PORTB = 0x00;
 }
 
 
@@ -47,12 +47,12 @@ void led_manual(void)
 
 void led_all_on(void)
 {
-	PORTA = 0xff;
+	PORTB = 0xff;
 }
 
 void led_all_off(void)
 {
-	PORTA = 0x00;
+	PORTB = 0x00;
 }
 
 void shift_left_led_on(void)
@@ -64,11 +64,11 @@ void shift_left_led_on(void)
 		msec_count = 0;
 		if (i >= 8) {
 			i = 0;
-			PORTA = 0;
+			PORTB = 0;
 			state_transition();
 		}
 		else {
-			PORTA = 0x01 << i++;
+			PORTB = 0x01 << i++;
 		}
 	}
 }
@@ -82,11 +82,11 @@ void shift_right_led_on(void)
 		msec_count = 0;
 		if (i >= 8) {
 			i = 0;
-			PORTA = 0;
+			PORTB = 0;
 			state_transition();
 		}
 		else {
-			PORTA = 0x80 >> i++;
+			PORTB = 0x80 >> i++;
 		}
 	}
 }
@@ -99,11 +99,11 @@ void shift_left_keep_led_on()
 		msec_count = 0;
 		if (i >= 8) {
 			i = 0;
-			PORTA = 0;
+			PORTB = 0;
 			state_transition();
 		}
 		else {
-			PORTA |= (0x01 << i);
+			PORTB |= (0x01 << i);
 			i++;
 		}
 	}
@@ -117,11 +117,11 @@ void shift_right_keep_led_on()
 		msec_count = 0;
 		if (i >= 8) {
 			i = 0;
-			PORTA = 0;
+			PORTB = 0;
 			state_transition();
 		}
 		else {
-			PORTA |= (0x80 >> i);
+			PORTB |= (0x80 >> i);
 			i++;
 		}
 	}
@@ -134,11 +134,11 @@ void flower_on(void) {
 		msec_count = 0;
 		if (i > 4) {
 			i = 0;
-			PORTA = 0;
+			PORTB = 0;
 			state_transition();
 		}
 		else {
-			PORTA |= 0x10 << i | 0x08 >> i;
+			PORTB |= 0x10 << i | 0x08 >> i;
 			i++;
 		}
 	}
@@ -153,11 +153,11 @@ void flower_off(void) {
 		msec_count = 0;
 		if (i > 4) {
 			i = 0;
-			PORTA = 0x00;
+			PORTB = 0x00;
 			state_transition();
 		}
 		else {
-			PORTA = (h >> i) & 0xf0 | (l << i) & 0x0f;
+			PORTB = (h >> i) & 0xf0 | (l << i) & 0x0f;
 			i++;
 		}
 	}
@@ -168,8 +168,8 @@ void pwm_led_control_sw_manner(void)
 	int dim = 0;		// LED 밝기 조정 변수
 	int direction = 1;	// 1 : 밝기 증가 모드 / -1 : 감소 모드
 	
-	DDRA = 0xFF;
-	PORTA = 0xFF;		// LED All On
+	DDRB = 0xFF;
+	PORTB = 0xFF;		// LED All On
 	// Dark => Bright; Bright => Dart
 	
 	while (1)

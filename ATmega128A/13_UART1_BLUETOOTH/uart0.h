@@ -1,11 +1,4 @@
-﻿#ifndef UART0_H_
-#define UART0_H_
-
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <string.h>
-
-#include "def.h"
+﻿#include "uart.h"
 
 /*
  * rx_buff:
@@ -26,6 +19,3 @@ void pc_command_processing(void);
 
 // 필요 시 '\n' 기반 메시지 완료 플래그
 volatile uint8_t rx_msg_received;
-
-
-#endif /* UART0_H_ */
