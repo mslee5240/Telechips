@@ -35,7 +35,8 @@ ISR(TIMER0_OVF_vect)
 	TCNT0 = 6;							// 타이머 카운터 재설정
 	if (timer_active == 1)
 	{
-		milliseconds++;					// 밀리초 카운터 증가
+		milliseconds++;	
+		milliseconds += 1;				// 밀리초 카운터 증가
 		milliseconds_1 += (speed % 6);	// motor speed에 따라 증가량 변화
 	}
 	displayUpdateCounter++;				// 디스플레이 갱신 신호
