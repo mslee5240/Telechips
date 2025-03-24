@@ -8,8 +8,6 @@ extern volatile int ultrasonic_check_timer;
 volatile int ultrasonic_dis = 0;
 //volatile char scm[50];
 
-volatile int8_t ovf_right= 0;
-volatile int8_t ovf_left= 0;
 //----------------------------------------------------
 // [ ISR(INT4_vect) ]
 // PE4 핀에 연결된 외부 인터럽트4. (ECHO 핀 신호가 바뀔 때마다 인터럽트 발생)
@@ -20,33 +18,6 @@ volatile int8_t ovf_left= 0;
 // - Falling Edge에서는 Timer1 카운트값을 기반으로 시간 계산을 진행
 //----------------------------------------------------
 ISR(INT4_vect)
-{
-	// ECHO 핀이 1이면(Rising Edge) -> 초음파 펄스가 시작되는 시점
-	if (ECHO_PIN & (1 << ECHO))
-	{
-		// Timer1 카운터를 0으로 클리어(펄스 시작)
-		//TCNT1 = 0;
-		righrt =tcnt1;
-		ovf_right = 0;
-	}
-	else
-	{
-
-		TCNT1 - right;
-		// ECHO 핀이 0이면(Falling Edge) -> 초음파 펄스가 끝나는 시점
-		// Timer1에 누적된 카운트값을 시간(us)으로 환산
-		// 16MHz를 1024로 분주 → 15625Hz(약 64us/카운트)
-		// = 1카운트마다 64us
-		// 그래서 (카운트값 × 64us)가 ECHO 핀 High 지속 시간
-		ultrasonic_dis = 1000000.0 * TCNT1 * 1024 / F_CPU;
-		
-		// 일반적으로 1cm를 이동하는 데 약 58us 소요되므로
-		// 측정된 시간(us)을 58로 나눈 값이 센서와 물체 사이의 거리(cm)
-		//sprintf(scm, "dis : %dcm\n", ultrasonic_dis / 58);
-	}
-}
-
-ISR(INT5_vect)
 {
 	// ECHO 핀이 1이면(Rising Edge) -> 초음파 펄스가 시작되는 시점
 	if (ECHO_PIN & (1 << ECHO))
@@ -68,7 +39,6 @@ ISR(INT5_vect)
 		//sprintf(scm, "dis : %dcm\n", ultrasonic_dis / 58);
 	}
 }
-
 
 //----------------------------------------------------
 // 초음파 센서 초기화 함수
