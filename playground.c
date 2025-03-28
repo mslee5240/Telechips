@@ -1,101 +1,143 @@
-volatile uint8_t timer2_ovf_right;
-volatile uint8_t timer2_ovf_left;
-volatile uint8_t timer2_ovf_forward;
+/*
+ * led.c
+ *
+ *  Created on: Mar 26, 2025
+ *      Author: eec04
+ */
+#include "led.h"
 
-ISR(TIMER2_OVF_vect) {
-   
-   ++timer2_ovf_right;
-   ++timer2_ovf_left;
-   ++timer2_ovf_forward;
+void led_all_on(void) {
+#if 1
+	*(unsigned int*)GPIOB_ODR = 0xFF;
+#else // origin
+//	HAL_GPIO_WritePin(GPIOB, 0xFF, 1);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
+							 GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 1);
+#endif
 }
 
-
-// ISR INT7_vec
-// 278page 표 12-3
-// PE4 외부 INT4 초음파 센서의 상승 하강 에지 둘다 INT4_vec로 들어옴
-// 상승 하강 한번씩 2번 들어옴
-ISR(INT4_vect) {
-   
-   // 인터럽트가 들어왔는데... echo의 값이 high이면 상승이고
-   if(ECHO_PIN & 1 << ECHO_RIGHT ) {
-      // 상승에지
-      //TCNT2 = 0;
-      echoStartTimeArr[ULTRASONIC_RIGHT] = TCNT2;
-      timer2_ovf_right = 0;   
-   } 
-   else {
-      // low인 경우는 하강임
-      // 하강 에지
-      
-      int count = TCNT2 - echoStartTimeArr[ULTRASONIC_RIGHT] + (timer2_ovf_right * 255);
-      ultrasonic_dist_right = 1000000.0 * count * 1024 / F_CPU; // 거리 구하기
-      //printf("low tcnt2 %d %d cnt:%d ovf:%d\r\n", TCNT2, echoStartTimeArr[ULTRASONIC_RIGHT], count, timer2_ovf);
-   }
+void led_all_off(void) {
+#if 1
+	*(unsigned int*)GPIOB_ODR = 0x00;
+#else // origin
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
+								 GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 0);
+#endif
 }
 
-ISR(INT5_vect) {
-   
-   // 인터럽트가 들어왔는데... echo의 값이 high이면 상승이고
-   if(ECHO_PIN & 1 << ECHO_FORWARD ) {
-      // 상승에지
-      //TCNT2 = 0;
-      echoStartTimeArr[ULTRASONIC_FORWARD] = TCNT2;
-      timer2_ovf_forward = 0;
-   }
-   else {
-      // low인 경우는 하강임
-      // 하강 에지
-      int count = TCNT2 - echoStartTimeArr[ULTRASONIC_FORWARD] + (timer2_ovf_forward * 255);
-      ultrasonic_dist_forward = 1000000.0 * count * 1024 / F_CPU; // 거리 구하기
-   }
+void led_main(void) {
+	while (1) {
+
+//		(*GPIOB).ODR |= GPIO_PIN_0;		// LED_0 ON
+//		GPIOB->ODR ^= GPIO_PIN_1;		// LED_1 Toggel
+//		HAL_Delay(500);
+//		GPIOB->ODR &= ~GPIO_PIN_0;		// LED_0 OFF
+//		HAL_Delay(500);
+
+//		led_all_on();
+//		HAL_Delay(50);
+//		led_all_off();
+//		HAL_Delay(50);
+
+//		shift_left_led_on();
+//		shift_right_led_on();
+//		shift_left_keep_led_on();
+//		shift_right_keep_led_on();
+		flower_on();
+//		flower_off();
+	}
 }
 
-ISR(INT6_vect) {
-   // 인터럽트가 들어왔는데... echo의 값이 high이면 상승이고
-   if(ECHO_PIN & 1 << ECHO_LEFT ) {
-      // 상승에지
-      //TCNT2 = 0;
-      echoStartTimeArr[ULTRASONIC_LEFT] = TCNT2;
-      timer2_ovf_left = 0;
-   }
-   else {
-      // low인 경우는 하강임
-      // 하강 에지
-      int count = TCNT2 - echoStartTimeArr[ULTRASONIC_LEFT] + (timer2_ovf_left * 255);
-      ultrasonic_dist_left = 1000000.0 * count * 1024 / F_CPU; // 거리 구하기
-   }
-
+void shift_left_led_on(void) {
+//	int pin = GPIO_PIN_0;
+	for (int i = 0; i < 8; i++) {
+		*(unsigned int*)GPIOB_ODR = GPIO_PIN_0 << i;	// [2/ DMA 방식으로 대체
+//		HAL_GPIO_WritePin(GPIOB, pin << i, 1);       // HAL 방식
+		HAL_Delay(200);
+		led_all_off();
+	}
 }
 
-
-
-// ultrasonic 초기화
-void init_ultrasonic() {
-   
-   // DDRG 4번 포트만 output mode 설정
-   TRIG_DDR |= 1 << TRIG_LEFT | 1 << TRIG_RIGHT | 1 << TRIG_FORWARD;   
-   
-   // DDRE 4번 포트만 input모드로 설정
-   ECHO_DDR &= ~(1 << ECHO_LEFT | 1 << ECHO_RIGHT | 1 << ECHO_FORWARD);
-   
-   
-   // EICRB 레지스터 참고!
-   // ISC 비트 설정에 따른 이터럽트 발생 시점 
-   //apge 287 12-6
-   // 0 1 : 상승 에지 ( rising edge) 하강 (falling edge) 둘 다 INT를 띄우도록
-   EICRB |= 0 << ISC41 | 1 << ISC40;
-   EICRB |= 0 << ISC51 | 1 << ISC50;
-   EICRB |= 0 << ISC61 | 1 << ISC60;
-   
-   ULTRASONIC_TIMER_TCCR |= 1 << CS22 | 1 << CS20; // 1024로 분주 설정
-   
-   //TCNT1 = 0; // 이래도 될 것 같은데
-   
-   // 문 열어놓기
-   // 287 page 12-6
-   // EIMSK(External Interrupt Mask Register)은 외부 인터럽트를 활성화 & 비활성화하는 레지스터
-   EIMSK |= 1 << INT4 | 1 << INT5 | 1 << INT6;
-   
-   // timer2 overflow INT 허용 ( enable )
-   TIMSK |= 1 << TOIE2; // TIMSK |= 0x01;
+void shift_right_led_on(void) {
+//	int pin = GPIO_PIN_7;
+	for (int i = 0; i < 8; i++) {
+		*(unsigned int*)GPIOB_ODR = GPIO_PIN_7 >> i;	// DMA 방식으로 대체
+//		HAL_GPIO_WritePin(GPIOB, pin >> i, 1);
+		HAL_Delay(200);
+		led_all_off();
+	}
 }
+
+void shift_left_keep_led_on(void) {
+//	int pin = GPIO_PIN_0;
+	for (int i = 0; i < 8; i++) {
+		*(unsigned int*)GPIOB_ODR |= GPIO_PIN_0 << i;	// DMA 방식으로 대체
+//		HAL_GPIO_WritePin(GPIOB, pin << i, 1);
+		HAL_Delay(200);
+	}
+	led_all_off();
+}
+
+void shift_right_keep_led_on(void) {
+//	int pin = GPIO_PIN_7;
+	for (int i = 0; i < 8; i++) {
+		*(unsigned int*)GPIOB_ODR |= GPIO_PIN_7 >> i;	// DMA 방식으로 대체
+//		HAL_GPIO_WritePin(GPIOB, pin >> i, 1);
+		HAL_Delay(200);
+	}
+	led_all_off();
+}
+
+void flower_on(void) {
+#if 1	// [3. Struct Manner]
+	for (int i = 0 ; i < 4; i++) {
+		GPIOB->ODR |= 0x10 << i | 0x08 >> i;
+		HAL_Delay(200);
+	}
+	led_all_off();
+	HAL_Delay(200);
+#endif
+
+#if 0	// [2. DMA Manner]
+	for (int i = 0 ; i < 4; i++) {
+		*(unsigned int*)GPIOB_ODR |= 0x10 << i | 0x08 >> i;
+		HAL_Delay(200);
+	}
+	led_all_off();
+	HAL_Delay(200);
+#endif
+
+#if 0	// [1. HAL Manner]
+	int pin = GPIO_PIN_3 | GPIO_PIN_4;
+	for (int i = 0; i < 3; i++) {
+		HAL_GPIO_WritePinS(GPIOB, pin, 1);
+		HAL_Delay(200);
+		pin = pin >> 1 | pin << 1;
+	}
+	led_all_off();
+#endif
+}
+
+void flower_off(void) {
+#if 1
+	int pin = 0xFF;
+	for (int i = 0; i < 4; i++) {
+		*(unsigned int*)GPIOB_ODR = pin;
+		HAL_Delay(200);
+		pin &= ~((1 << (7 - i)) | (1 << i));
+	}
+	led_all_off();
+	HAL_Delay(200);
+#else
+    int pin = 0xFF;
+    for (int i = 0; i < 4; i++) {
+        HAL_GPIO_WritePin(GPIOB, pin, 1);
+        HAL_Delay(200);
+        pin &= ~((1 << i) | (1 << (7 - i)));
+        led_all_off();
+    }
+
+    led_all_off();
+#endif
+}
+

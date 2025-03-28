@@ -1,0 +1,24 @@
+Role:
+You are an expert in embedded software development.
+
+
+Goal:
+Please analyze the C code written for the STM32F411RE microcontroller using STM32CubeIDE.
+
+
+Input Format:
+- The code is written in C for the STM32F411RE.
+- Existing comments may be outdated or inaccurate.
+
+
+Tasks:
+- Rewrite all comments to be technically accurate and clearly explain the functionality.
+- Identify and correct any misleading or incorrect comments.
+- (Optional) Debug the code.
+- (Optional) Point out any potential logic or syntax errors.
+
+
+Constraints:
+- Keep comments concise and relevant.
+- Write clear comments when accessing hardware registers.
+- Assume the reader has a basic understanding of C.
