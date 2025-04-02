@@ -1,143 +1,68 @@
-/*
- * led.c
- *
- *  Created on: Mar 26, 2025
- *      Author: eec04
- */
-#include "led.h"
+void fire_siren(int repeat) {
+	int frequency = 700;	// 700 ~ 1500
 
-void led_all_on(void) {
-#if 1
-	*(unsigned int*)GPIOB_ODR = 0xFF;
-#else // origin
-//	HAL_GPIO_WritePin(GPIOB, 0xFF, 1);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
-							 GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 1);
-#endif
+	set_buzzer(frequency);
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
+	for (int i = 0; i < repeat; i++) {
+		for (int j = 0; j < 22; j++) {
+			frequency += 35;
+			set_buzzer(frequency);
+			HAL_Delay(20);
+		}
+		for (int j = 0; j < 53; j++) {
+			frequency -= 15;
+			set_buzzer(frequency);
+			HAL_Delay(20);
+		}
+		noTone();
+	}
+	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
 }
 
-void led_all_off(void) {
-#if 1
-	*(unsigned int*)GPIOB_ODR = 0x00;
-#else // origin
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
-								 GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 0);
-#endif
-}
+void ambulance_siren(int repeat) {
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
-void led_main(void) {
-	while (1) {
-
-//		(*GPIOB).ODR |= GPIO_PIN_0;		// LED_0 ON
-//		GPIOB->ODR ^= GPIO_PIN_1;		// LED_1 Toggel
-//		HAL_Delay(500);
-//		GPIOB->ODR &= ~GPIO_PIN_0;		// LED_0 OFF
-//		HAL_Delay(500);
-
-//		led_all_on();
-//		HAL_Delay(50);
-//		led_all_off();
-//		HAL_Delay(50);
-
-//		shift_left_led_on();
-//		shift_right_led_on();
-//		shift_left_keep_led_on();
-//		shift_right_keep_led_on();
-		flower_on();
-//		flower_off();
-	}
-}
-
-void shift_left_led_on(void) {
-//	int pin = GPIO_PIN_0;
-	for (int i = 0; i < 8; i++) {
-		*(unsigned int*)GPIOB_ODR = GPIO_PIN_0 << i;	// [2/ DMA 방식으로 대체
-//		HAL_GPIO_WritePin(GPIOB, pin << i, 1);       // HAL 방식
-		HAL_Delay(200);
-		led_all_off();
-	}
-}
-
-void shift_right_led_on(void) {
-//	int pin = GPIO_PIN_7;
-	for (int i = 0; i < 8; i++) {
-		*(unsigned int*)GPIOB_ODR = GPIO_PIN_7 >> i;	// DMA 방식으로 대체
-//		HAL_GPIO_WritePin(GPIOB, pin >> i, 1);
-		HAL_Delay(200);
-		led_all_off();
-	}
-}
-
-void shift_left_keep_led_on(void) {
-//	int pin = GPIO_PIN_0;
-	for (int i = 0; i < 8; i++) {
-		*(unsigned int*)GPIOB_ODR |= GPIO_PIN_0 << i;	// DMA 방식으로 대체
-//		HAL_GPIO_WritePin(GPIOB, pin << i, 1);
-		HAL_Delay(200);
-	}
-	led_all_off();
-}
-
-void shift_right_keep_led_on(void) {
-//	int pin = GPIO_PIN_7;
-	for (int i = 0; i < 8; i++) {
-		*(unsigned int*)GPIOB_ODR |= GPIO_PIN_7 >> i;	// DMA 방식으로 대체
-//		HAL_GPIO_WritePin(GPIOB, pin >> i, 1);
-		HAL_Delay(200);
-	}
-	led_all_off();
-}
-
-void flower_on(void) {
-#if 1	// [3. Struct Manner]
-	for (int i = 0 ; i < 4; i++) {
-		GPIOB->ODR |= 0x10 << i | 0x08 >> i;
-		HAL_Delay(200);
-	}
-	led_all_off();
-	HAL_Delay(200);
-#endif
-
-#if 0	// [2. DMA Manner]
-	for (int i = 0 ; i < 4; i++) {
-		*(unsigned int*)GPIOB_ODR |= 0x10 << i | 0x08 >> i;
-		HAL_Delay(200);
-	}
-	led_all_off();
-	HAL_Delay(200);
-#endif
-
-#if 0	// [1. HAL Manner]
-	int pin = GPIO_PIN_3 | GPIO_PIN_4;
-	for (int i = 0; i < 3; i++) {
-		HAL_GPIO_WritePinS(GPIOB, pin, 1);
-		HAL_Delay(200);
-		pin = pin >> 1 | pin << 1;
-	}
-	led_all_off();
-#endif
-}
-
-void flower_off(void) {
-#if 1
-	int pin = 0xFF;
-	for (int i = 0; i < 4; i++) {
-		*(unsigned int*)GPIOB_ODR = pin;
-		HAL_Delay(200);
-		pin &= ~((1 << (7 - i)) | (1 << i));
-	}
-	led_all_off();
-	HAL_Delay(200);
-#else
-    int pin = 0xFF;
-    for (int i = 0; i < 4; i++) {
-        HAL_GPIO_WritePin(GPIOB, pin, 1);
+    for (int i = 0; i < repeat; i++) {
+        for (int j = 0; j < 10; j++) {
+            set_buzzer(1200); // 높은 톤
+            HAL_Delay(100);   // 짧게 유지
+            set_buzzer(900);  // 낮은 톤
+            HAL_Delay(100);   // 짧게 유지
+        }
+        noTone(); // 끄기
         HAL_Delay(200);
-        pin &= ~((1 << i) | (1 << (7 - i)));
-        led_all_off();
     }
 
-    led_all_off();
-#endif
+    HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
 }
 
+void close_buzzer() {
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
+	setBuzzer(1000); // 1kHz로 세팅
+	HAL_Delay(70);
+	setBuzzer(2000); // 2kHz로 세팅
+	HAL_Delay(70);
+	setBuzzer(3000); // 3kHz로 세팅
+	HAL_Delay(70);
+	setBuzzer(4000); // 4kHz로 세팅
+	HAL_Delay(70);
+
+	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+}
+
+void open_buzzer() {
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
+	setBuzzer(261); // 1kHz로 세팅
+	HAL_Delay(70);
+	setBuzzer(329); // 2kHz로 세팅
+	HAL_Delay(70);
+	setBuzzer(392); // 3kHz로 세팅
+	HAL_Delay(70);
+	setBuzzer(554); // 4kHz로 세팅
+	HAL_Delay(70);
+
+	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+}

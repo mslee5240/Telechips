@@ -7,12 +7,13 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
-  * All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -65,12 +66,22 @@ void Error_Handler(void);
 #define USART_RX_GPIO_Port GPIOA
 #define LD2_Pin GPIO_PIN_5
 #define LD2_GPIO_Port GPIOA
+#define CE_DS1302_Pin GPIO_PIN_10
+#define CE_DS1302_GPIO_Port GPIOA
+#define IO_DS1302_Pin GPIO_PIN_11
+#define IO_DS1302_GPIO_Port GPIOA
+#define CLK_DS1302_Pin GPIO_PIN_12
+#define CLK_DS1302_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
-
 /* USER CODE BEGIN Private defines */
+
+typedef struct print_option{
+	uint8_t p_rtc; // 0 : on, 1 : off
+	uint8_t p_led;
+}t_print;
 
 /* USER CODE END Private defines */
 
@@ -79,3 +90,5 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

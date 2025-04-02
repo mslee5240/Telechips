@@ -1,13 +1,3 @@
-/*
- * ds1302.h
- *
- *  Created on: Mar 28, 2025
- *      Author: eec04
- */
-
-#ifndef INC_DS1302_H_
-#define INC_DS1302_H_
-
 #include "main.h"	// HAL, GPIO
 
 #define ADDR_SECONDS			0x80	// write addr만 define 하기로하자
@@ -51,6 +41,3 @@ typedef struct s_ds1302 {
 t_ds1302 ds1302;
 
 
-
-
-#endif /* INC_DS1302_H_ */
